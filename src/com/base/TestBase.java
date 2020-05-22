@@ -6,7 +6,6 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
@@ -21,7 +20,7 @@ public class TestBase {
 
 		prop = new Properties();
 		try {
-			FileInputStream fis = new FileInputStream("C:\\Users\\Shilpa\\eclipse-workspace\\mavenjenkins\\DynamicWebTableTrendlyne\\src\\com\\config\\config.properties");
+			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/com/config/config.properties");
 			prop.load(fis);
 		} 
 		catch (FileNotFoundException e) {
@@ -39,7 +38,7 @@ public class TestBase {
 
 		if(browserName.equalsIgnoreCase("chrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Shilpa\\eclipse-workspace\\mavenjenkins\\DynamicWebTableTrendlyne\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
 			driver = new ChromeDriver();
 
