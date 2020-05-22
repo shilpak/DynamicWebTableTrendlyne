@@ -1,5 +1,6 @@
 # ignore all files in directory named target
 target/
+bin/
 # ignore all files in directory named json_output
 json_output/
 test-output/
