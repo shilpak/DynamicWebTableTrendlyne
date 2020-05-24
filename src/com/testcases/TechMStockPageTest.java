@@ -7,13 +7,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.base.TestBase;
 import com.pages.TechMStockPage;
+import com.util.TestData;
 import com.util.TestUtil;
-
 
 public class TechMStockPageTest extends TestBase{
 	
 	TechMStockPage techMstockpage;
 	TestUtil testutil;
+	TestData testdata;
 	
 	public TechMStockPageTest() {
 		super();
@@ -24,6 +25,7 @@ public class TechMStockPageTest extends TestBase{
 		intialization();
 		testutil=new TestUtil();
 		techMstockpage=new TechMStockPage();
+		testdata = new TestData();
 	}
 	
 	@Test(priority = 1)
@@ -34,7 +36,7 @@ public class TechMStockPageTest extends TestBase{
 	
 	@Test(priority = 2)
 	public void verifyClientNameIsPresent() throws InterruptedException {
-		Boolean isNamePresent = this.techMstockpage.findClientName(prop.getProperty("name"));
+		Boolean isNamePresent = this.techMstockpage.findClientName(TestData.properties.getProperty("name"));
 		Assert.assertTrue(isNamePresent);
 	}
 	
