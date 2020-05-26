@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import com.base.TestBase;
 
-public class TestUtil extends TestBase{
+public class TestUtil extends TestBase {
 	
 	public static WebDriver driver;
 	public static long Page_Load_TimeOut=20;

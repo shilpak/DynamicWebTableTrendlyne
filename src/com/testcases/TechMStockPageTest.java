@@ -1,12 +1,12 @@
 package com.testcases;
 
-
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.base.TestBase;
 import com.pages.TechMStockPage;
+import com.util.BrowserUtil;
 import com.util.TestData;
 import com.util.TestUtil;
 
@@ -15,6 +15,7 @@ public class TechMStockPageTest extends TestBase{
 	TechMStockPage techMstockpage;
 	TestUtil testutil;
 	TestData testdata;
+	BrowserUtil browserUtil;
 	
 	public TechMStockPageTest() {
 		super();
@@ -22,7 +23,8 @@ public class TechMStockPageTest extends TestBase{
 
 	@BeforeTest
 	public void setUp() {
-		intialization();
+		BrowserUtil browserUtil = new BrowserUtil();
+		browserUtil.intialization();
 		testutil=new TestUtil();
 		techMstockpage=new TechMStockPage();
 		testdata = new TestData();

@@ -6,15 +6,19 @@ import java.util.NoSuchElementException;
 import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.base.TestBase;
+import com.util.BrowserUtil;
 import com.util.TestUtil;
-import com.util.LocatorsPage;
 
-public class TechMStockPage extends TestBase {
+public class TechMStockPage extends BrowserUtil {
+	
+	public static String webTable = "table[class*='tl-dataTable']";
+	public static String webTableRowCount = "table[class*='tl-dataTable']>tbody>tr";
+	public static String webTableFirstColumn = "table[class*='tl-dataTable']>tbody>tr>td:nth-child(1)";
+	public static String lastListElement = "div[class*='dataTables_paginate paging_simple_numbers']>ul>li:last-child";
 
 	static Properties prop;
 	TestUtil testutil;
-	LocatorsPage locators;
+	
 
 	public String getTitle() {
 		return driver.getTitle();
@@ -23,25 +27,25 @@ public class TechMStockPage extends TestBase {
 	public boolean findClientName(String clientName) throws InterruptedException {
 		try {
 			List<String> names = new ArrayList<String>();
-			driver.findElement(By.cssSelector(LocatorsPage.webTable));
+			driver.findElement(By.cssSelector(webTable));
 			TestUtil.scrollDownBy(driver);
-			List<WebElement> namesElements=driver.findElements(By.cssSelector(LocatorsPage.webTableFirstColumn)); 
+			List<WebElement> namesElements=driver.findElements(By.cssSelector(webTableFirstColumn)); 
 
 			for(WebElement namesElement : namesElements) {		    
 				names.add(namesElement.getText());
 			}
-			String liclass = driver.findElement(By.cssSelector(LocatorsPage.lastListElement)).getAttribute("class");
+			String liclass = driver.findElement(By.cssSelector(lastListElement)).getAttribute("class");
 
 			while(!liclass.contains("disabled")) {
-				WebElement nextButton = driver.findElement(By.cssSelector(LocatorsPage.lastListElement));
+				WebElement nextButton = driver.findElement(By.cssSelector(lastListElement));
 				TestUtil.javaScriptClick(driver,nextButton);
 
-				namesElements=driver.findElements(By.cssSelector(LocatorsPage.webTableFirstColumn));				
+				namesElements=driver.findElements(By.cssSelector(webTableFirstColumn));				
 				for(WebElement namesElement : namesElements) {		    
 					names.add(namesElement.getText());
 				}
 
-				liclass = driver.findElement(By.cssSelector(LocatorsPage.lastListElement)).getAttribute("class");
+				liclass = driver.findElement(By.cssSelector(lastListElement)).getAttribute("class");
 			}
 			for(String name : names) {
 				if(name.trim().equals(clientName))
