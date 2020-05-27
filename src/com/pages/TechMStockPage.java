@@ -3,20 +3,18 @@ package com.pages;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.util.BrowserUtil;
+import com.base.DriverPage;
 import com.util.TestUtil;
 
-public class TechMStockPage extends BrowserUtil {
+public class TechMStockPage extends DriverPage {
 	
 	public static String webTable = "table[class*='tl-dataTable']";
 	public static String webTableRowCount = "table[class*='tl-dataTable']>tbody>tr";
 	public static String webTableFirstColumn = "table[class*='tl-dataTable']>tbody>tr>td:nth-child(1)";
 	public static String lastListElement = "div[class*='dataTables_paginate paging_simple_numbers']>ul>li:last-child";
 
-	static Properties prop;
 	TestUtil testutil;
 	
 

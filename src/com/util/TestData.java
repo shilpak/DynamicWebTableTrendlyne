@@ -3,12 +3,10 @@ package com.util;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Properties;
-import org.openqa.selenium.WebDriver;
 
 
-public class TestData extends BrowserUtil {
-	
-	public static WebDriver driver;
+public class TestData {
+
 	public static Properties properties;
 
 	public TestData() {

@@ -3,16 +3,13 @@ package com.base;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Properties;
-import org.openqa.selenium.WebDriver;
 
 
-public class TestBase {
+public class BasePage {
 
-	public static WebDriver driver;
 	public static Properties prop;
 
-	public TestBase() {
-
+	public BasePage() {
 		prop = new Properties();
 		try {
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/com/config/config.properties");
@@ -26,5 +23,4 @@ public class TestBase {
 			e.printStackTrace();
 		}
 	}
-
 }
