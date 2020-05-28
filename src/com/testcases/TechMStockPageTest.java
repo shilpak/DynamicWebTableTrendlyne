@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 import com.pages.TechMStockPage;
 import com.util.TestData;
 
-public class TechMStockPageTest extends DriverTest {
+public class TechMStockPageTest extends BasePageTest {
 
+	//Instantiate TechMStockPage and TestData class object
 	TechMStockPage techMstockpage = new TechMStockPage();
 	TestData testdata = new TestData();
 
@@ -23,5 +24,4 @@ public class TechMStockPageTest extends DriverTest {
 		Assert.assertTrue(isNamePresent);
 	}
 	
-
 }

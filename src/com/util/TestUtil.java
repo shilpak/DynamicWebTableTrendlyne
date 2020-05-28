@@ -8,16 +8,17 @@ import org.openqa.selenium.WebElement;
 
 public class TestUtil {
 	
-	public static WebDriver driver;
 	public static long Page_Load_TimeOut=20;
 	public static long IMPLICIT_WAIT=10;
 	
+	//method to scrolldown the window
 	public static void scrollDownBy(WebDriver driver)
 	{
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("window.scrollBy(0,800)");
 	}
 	
+	//method to click the element using javascriptExecutor
 	public static void javaScriptClick(WebDriver driver, WebElement element) throws InterruptedException{
 		try {
 			if (element.isEnabled() && element.isDisplayed()) {

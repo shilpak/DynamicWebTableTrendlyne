@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.base.DriverPage;
+import com.base.BasePage;
 import com.util.TestUtil;
 
-public class TechMStockPage extends DriverPage {
+public class TechMStockPage extends BasePage {
 	
 	public static String webTable = "table[class*='tl-dataTable']";
 	public static String webTableRowCount = "table[class*='tl-dataTable']>tbody>tr";
@@ -17,11 +17,12 @@ public class TechMStockPage extends DriverPage {
 
 	TestUtil testutil;
 	
-
+	//The title value to be verified in the TechMStockPageTest class
 	public String getTitle() {
 		return driver.getTitle();
 	}
 
+	//client name to be verified after entering it into the table
 	public boolean findClientName(String clientName) throws InterruptedException {
 		try {
 			List<String> names = new ArrayList<String>();
