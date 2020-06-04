@@ -1,13 +1,12 @@
-package com.util;
+package com.reusablecode;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+public class MethodsVariable {
 
-public class TestUtil {
-	
 	public static long Page_Load_TimeOut=20;
 	public static long IMPLICIT_WAIT=10;
 	
@@ -34,5 +33,3 @@ public class TestUtil {
 	}
 	
 }
-
-	

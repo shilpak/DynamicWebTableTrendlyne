@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="DynamicWebTableTrendlyne Test Automation Test Suite">
+<suite name="DynamicWebTableTrendlyne Test Automation Test Suite" verbose="2" allow-return-values="true">
 	<listeners>
 		<listener class-name="com.extentReport.ExtentReport" />
 	</listeners>
