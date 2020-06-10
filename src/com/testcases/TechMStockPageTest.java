@@ -30,6 +30,7 @@ public class TechMStockPageTest extends BasePageTest {
 		Boolean isNamePresent = this.techMstockpage.findClientName(DataTest.properties.getProperty("name"));
 		Assert.assertTrue(isNamePresent);
 		log.info("****************************** ending verifyClientNameIsPresent test case *****************************************");
+		
 	}
 	
 }

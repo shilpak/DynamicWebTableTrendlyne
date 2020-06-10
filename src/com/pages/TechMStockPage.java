@@ -57,6 +57,7 @@ public class TechMStockPage extends BasePage {
 			}
 			return false;
 		}catch(NoSuchElementException e){
+			log.error("client name not found");
 			return false;
 		}
 	}
