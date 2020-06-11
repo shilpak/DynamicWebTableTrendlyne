@@ -9,3 +9,4 @@ ExtentReports/
 .classpath
 .project
 .settings
+.chromedriver.exe
