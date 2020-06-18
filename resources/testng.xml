@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="DynamicWebTableTrendlyne Test Automation Test Suite" verbose="2" allow-return-values="true">
-<!-- 	<listeners>
-		<listener class-name="com.extentReport.ExtentReport" />
-	</listeners> -->
-	<test name="DynamicWebTableTrendlyne Test">
+<!-- 	<listeners> 
+	<listener class-name="com.extentReport.ExtentReport" /> 
+		</listeners> -->
+	<test name="DynamicWebTableTrendlyne Test" parallel="methods" thread-count="2" >
+		
 		<classes>
-			<class name="com.testcases.TechMStockPageTest"></class>
+			<class name="com.testcases.BasePageTest" />
+			<class name="com.testcases.TechMStockPageTest" />
 		</classes>
 	</test>
 </suite>
