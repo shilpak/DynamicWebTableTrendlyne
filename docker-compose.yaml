@@ -1,5 +1,6 @@
 # To execute this docker-compose yml file use 'docker-compose -f <file_name> up'
 # Add the '-d' flag at the end for detached execution
+#docker run -d -p 4444:4444 --name <container-name> <image-name> 
 version: "3"
 services:
   selenium-hub:
@@ -9,6 +10,7 @@ services:
       - "4444:4444"
   chrome:
     image: selenium/node-chrome:latest
+    container_name: chrome
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -18,6 +20,7 @@ services:
       - HUB_PORT=4444
   firefox:
     image: selenium/node-firefox:latest
+    container_name: firefox
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
