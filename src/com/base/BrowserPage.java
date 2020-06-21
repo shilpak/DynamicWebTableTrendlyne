@@ -35,12 +35,10 @@ public class BrowserPage {
 		if(browserName.equalsIgnoreCase("chrome")){
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
-			System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 		else if(browserName.equals("firefox")){
 			log.info("launch firefox browser");
-			System.setProperty("webdriver.gecko.driver", "./Drivers/geckodriver.exe");
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
 			driver=new FirefoxDriver();
 		}
