@@ -44,6 +44,12 @@ public class BasePage extends BrowserPage {
 		driver.manage().window().maximize();		
 		driver.manage().timeouts().pageLoadTimeout(MethodsVariable.Page_Load_TimeOut,TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(MethodsVariable.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		driver.get(ReadConfigurationFile.prop.getProperty("url"));
 		driver.manage().deleteAllCookies();
 		WebDriverManager.setWebDriver(driver);
@@ -53,6 +59,7 @@ public class BasePage extends BrowserPage {
 
 	//method to start the browser 
 	public static void intialization() {
+
 		if(WebDriverManager.getDriver() == null) {
 			new WebDriverManager();
 			log.info("use of singleton");

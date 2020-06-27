@@ -2,9 +2,9 @@ package com.testcases;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
+
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
@@ -27,19 +27,11 @@ public class BasePageTest {
 	public void setup() throws Exception {	
 		log.info("****************************** Starting test case execution  *****************************************");		
 		//new ReadConfigurationFile();		
-		BasePage.intialization();
+		//BasePage.intialization();
 		new BasePage();
-
+		
 	}
 	
-/*	public void createpage() {
-		page = new BasePage();
-	}
-	
-	public BasePage getPage() {
-		return page;
-	}*/
-
 	/* This method will call the closewindow method from basePage class
 	 * and as it has @AfterTest annotation this test will execute after all the test
 	 */

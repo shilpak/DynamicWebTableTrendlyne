@@ -1,16 +1,18 @@
 package com.base;
 
 import org.openqa.selenium.WebDriver;
+import com.base.BrowserPage;
 
 public class WebDriverManager {
+	
 	
 	public static ThreadLocal<WebDriver> webdriver = new ThreadLocal<WebDriver>();
 	
 	public static WebDriver getDriver() {
 		
 		return webdriver.get();
-		
-	}
+
+    }
 	
 	public static void setWebDriver(WebDriver driver) {
 		

@@ -12,8 +12,8 @@ How to run the test using maven commands
 
 Add surefire plugin in pom.xml file to run the maven test from command line.
 mvn test
-mvn test -Dbrowser.type=chrome to run the test on chrome browser.
-mvn test -Dbrowser.type=firefox to run the test on firefox browser.
+mvn -Dbrowser=chrome test to run the test on chrome browser.
+mvn -Dbrowser=firefox test to run the test on firefox browser.
 You can even run as mvn test which will trigger the testng.xml
 
 

@@ -17,7 +17,7 @@ public class DataTest {
 			properties = new Properties();
 			try {
 				//take reference to the testData.properties file
-				FileInputStream file = new FileInputStream("C:\\Users\\Shilpa\\eclipse-workspace\\mavenjenkins\\dynamicWebTableStock\\src\\main\\java\\com\\config\\testData.properties");
+				FileInputStream file = new FileInputStream(System.getProperty("user.dir")+"/src/com/config/testData.properties");
 				//load the testData.properties file
 				properties.load(file);
 				log.info("load the testdata properties file");
