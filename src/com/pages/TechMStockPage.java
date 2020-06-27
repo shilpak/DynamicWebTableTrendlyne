@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.base.BasePage;
+import com.base.BrowserPage;
 import com.base.WebDriverManager;
 import com.reusablecode.MethodsVariable;
 
@@ -21,7 +22,7 @@ public class TechMStockPage extends BasePage {
 
 	MethodsVariable methodsvariable;
 	private static final Logger log = LoggerFactory.getLogger(TechMStockPage.class);
-
+	BrowserPage browserpage;
 	//The title value to be verified in the TechMStockPageTest class
 	public String getTitle() {
 		log.info("get the page title");
@@ -30,10 +31,11 @@ public class TechMStockPage extends BasePage {
 
 	//client name to be verified after entering it into the table
 	public boolean findClientName(String clientName) throws InterruptedException {
+		browserpage = new BrowserPage();
 		try {
 			List<String> names = new ArrayList<String>();
 			WebDriverManager.getDriver().findElement(By.cssSelector(webTable));
-			MethodsVariable.scrollDownBy(driver);
+			MethodsVariable.scrollDownBy(BrowserPage.driver);
 			List<WebElement> namesElements=WebDriverManager.getDriver().findElements(By.cssSelector(webTableFirstColumn)); 
 			for(WebElement namesElement : namesElements) {		    
 				names.add(namesElement.getText());

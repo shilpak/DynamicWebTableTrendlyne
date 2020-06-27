@@ -1,7 +1,6 @@
 package com.base;
 
 import org.openqa.selenium.WebDriver;
-import com.base.BrowserPage;
 
 public class WebDriverManager {
 	

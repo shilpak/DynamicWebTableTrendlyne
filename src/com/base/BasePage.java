@@ -6,18 +6,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.reusablecode.MethodsVariable;
 import com.base.ReadConfigurationFile;
+import com.base.BrowserPage;
 
-public class BasePage extends BrowserPage {
-
+public class BasePage {
 	private static final Logger log = LoggerFactory.getLogger(BasePage.class);
 	ReadConfigurationFile readconfig;
+	BrowserPage browserpage;
 
 	public BasePage() {
 		readconfig = new ReadConfigurationFile();
+		browserpage = new BrowserPage();
 
 		if(ReadConfigurationFile.prop.getProperty("RunMode").equalsIgnoreCase("local")) {
 			try {
-				launchLocalBrowser();
+				browserpage.launchLocalBrowser();
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -26,7 +28,7 @@ public class BasePage extends BrowserPage {
 		}
 		else if(ReadConfigurationFile.prop.getProperty("RunMode").equalsIgnoreCase("remote")) {
 			try {
-				launchRemoteBrowser();
+				browserpage.launchRemoteBrowser();
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,19 +43,12 @@ public class BasePage extends BrowserPage {
 			}
 		}
 
-		driver.manage().window().maximize();		
-		driver.manage().timeouts().pageLoadTimeout(MethodsVariable.Page_Load_TimeOut,TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(MethodsVariable.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		try {
-			Thread.sleep(50000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.get(ReadConfigurationFile.prop.getProperty("url"));
-		driver.manage().deleteAllCookies();
-		WebDriverManager.setWebDriver(driver);
-
+		BrowserPage.driver.manage().window().maximize();		
+		BrowserPage.driver.manage().timeouts().pageLoadTimeout(MethodsVariable.Page_Load_TimeOut,TimeUnit.SECONDS);
+		BrowserPage.driver.manage().timeouts().implicitlyWait(MethodsVariable.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		BrowserPage.driver.get(ReadConfigurationFile.prop.getProperty("url"));
+		BrowserPage.driver.manage().deleteAllCookies();
+		WebDriverManager.setWebDriver(BrowserPage.driver);
 	}
 
 

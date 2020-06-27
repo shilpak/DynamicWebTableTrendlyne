@@ -13,7 +13,7 @@ public class TechMStockPageTest extends BasePageTest {
 	//Instantiate TechMStockPage and TestData class object
 	//TechMStockPage techMstockpage = new TechMStockPage();
 	DataTest datatest = new DataTest();
-	TechMStockPage techMstockapge = new TechMStockPage();
+	TechMStockPage techMstockapge  = new TechMStockPage();
 
 	@Test(priority = 1)
 	public void verifyPageTitle() {
