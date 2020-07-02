@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 
 public class MethodsVariable {
 
-	public static long Page_Load_TimeOut=40;
-	public static long IMPLICIT_WAIT=30;
+	public static long Page_Load_TimeOut=20;
+	public static long IMPLICIT_WAIT=10;
 	
 	//method to scrolldown the window
 	public static void scrollDownBy(WebDriver driver)

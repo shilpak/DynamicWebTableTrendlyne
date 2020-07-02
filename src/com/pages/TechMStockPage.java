@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.base.BasePage;
 import com.base.BrowserPage;
-import com.base.WebDriverManager;
 import com.reusablecode.MethodsVariable;
 
 
@@ -26,7 +25,7 @@ public class TechMStockPage extends BasePage {
 	//The title value to be verified in the TechMStockPageTest class
 	public String getTitle() {
 		log.info("get the page title");
-		return WebDriverManager.getDriver().getTitle();
+		return BrowserPage.driver.getTitle();
 	}
 
 	//client name to be verified after entering it into the table
@@ -34,24 +33,24 @@ public class TechMStockPage extends BasePage {
 		browserpage = new BrowserPage();
 		try {
 			List<String> names = new ArrayList<String>();
-			WebDriverManager.getDriver().findElement(By.cssSelector(webTable));
+			BrowserPage.driver.findElement(By.cssSelector(webTable));
 			MethodsVariable.scrollDownBy(BrowserPage.driver);
-			List<WebElement> namesElements=WebDriverManager.getDriver().findElements(By.cssSelector(webTableFirstColumn)); 
+			List<WebElement> namesElements=BrowserPage.driver.findElements(By.cssSelector(webTableFirstColumn)); 
 			for(WebElement namesElement : namesElements) {		    
 				names.add(namesElement.getText());
 			}
-			String liclass = WebDriverManager.getDriver().findElement(By.cssSelector(lastListElement)).getAttribute("class");
+			String liclass = BrowserPage.driver.findElement(By.cssSelector(lastListElement)).getAttribute("class");
 
 			while(!liclass.contains("disabled")) {
-				WebElement nextButton = WebDriverManager.getDriver().findElement(By.cssSelector(lastListElement));
-				MethodsVariable.javaScriptClick(WebDriverManager.getDriver(),nextButton);
+				WebElement nextButton = BrowserPage.driver.findElement(By.cssSelector(lastListElement));
+				MethodsVariable.javaScriptClick(BrowserPage.driver,nextButton);
 
-				namesElements=WebDriverManager.getDriver().findElements(By.cssSelector(webTableFirstColumn));				
+				namesElements=BrowserPage.driver.findElements(By.cssSelector(webTableFirstColumn));				
 				for(WebElement namesElement : namesElements) {		    
 					names.add(namesElement.getText());
 				}
 
-				liclass = WebDriverManager.getDriver().findElement(By.cssSelector(lastListElement)).getAttribute("class");
+				liclass = BrowserPage.driver.findElement(By.cssSelector(lastListElement)).getAttribute("class");
 			}
 			log.info("trying to find the client name in the webTable column");
 			for(String name : names) {

@@ -2,12 +2,12 @@ package com.testcases;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import com.base.BasePage;
-import com.base.ReadConfigurationFile;
-import com.base.RemoteConfiguration;
+
+
 
 public class BasePageTest {
 
@@ -18,11 +18,10 @@ public class BasePageTest {
 	 * TechMStockPageTest will be free from driver instance variable and
 	 * as it has @BeforeTest annotation this test will execute before all test
 	 */
-	public BasePage page;
 
-	@BeforeTest
+	@BeforeMethod
 	public void setup() throws Exception {	
-		log.info("****************************** Starting test case execution  *****************************************");						
+		log.info("****************************** Starting test case execution  *****************************************");	
 		BasePage.intialization();
 	}
 
@@ -30,25 +29,10 @@ public class BasePageTest {
 	 * and as it has @AfterTest annotation this test will execute after all the test
 	 */
 
-	@AfterTest
+	@AfterMethod
 	public void tearDown() {
 		BasePage.closeWindow();
 		log.info("****************************** Browser is closed *****************************************");
 	}
 
-	@BeforeSuite
-	public void beforeSuite() {
-
-		if(ReadConfigurationFile.prop.getProperty("RunMode").equalsIgnoreCase("Remote")) {
-			RemoteConfiguration.remoteStartUp();
-		}
-	}
-
-	@BeforeSuite
-	public void afterSuite() {
-
-		if(ReadConfigurationFile.prop.getProperty("RunMode").equalsIgnoreCase("Remote")) {
-			RemoteConfiguration.remoteShutDown();
-		}
-	}
 }
