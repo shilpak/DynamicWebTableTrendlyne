@@ -11,9 +11,7 @@ public class BasePage extends BrowserPage{
 	public static void intialization() throws Exception {
 		BrowserPage.launchBrowser();
 		//open the webapplication
-		System.out.println("check 1");
 		driver.get(ReadConfigurationFile.prop.getProperty("url"));
-		System.out.println("check 2");
 
 	}
 
