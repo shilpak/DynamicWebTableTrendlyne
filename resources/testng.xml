@@ -4,10 +4,10 @@
 <!-- 	<listeners> 
 	<listener class-name="com.extentReport.ExtentReport" /> 
 		</listeners> -->
+		<parameter name="browserName" value="chrome"/>
 	<test name="DynamicWebTableTrendlyne Test" >
 		
-		<classes>
-			<class name="com.testcases.BasePageTest" />
+		<classes>			
 			<class name="com.testcases.TechMStockPageTest" />
 		</classes>
 	</test>

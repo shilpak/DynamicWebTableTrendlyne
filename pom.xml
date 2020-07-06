@@ -33,7 +33,7 @@
 				<version>2.22.2</version>
 				<configuration>
 					<systemPropertyVariables>
-						<browser>${browserName}</browser>
+						<browser.type>${browserName}</browser.type>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>resources\testng.xml</suiteXmlFile>

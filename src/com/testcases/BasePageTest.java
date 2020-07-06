@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import com.base.BasePage;
 
 
@@ -19,10 +18,11 @@ public class BasePageTest {
 	 * as it has @BeforeTest annotation this test will execute before all test
 	 */
 
-	@BeforeMethod
+	
+	@BeforeMethod	
 	public void setup() throws Exception {	
-		log.info("****************************** Starting test case execution  *****************************************");	
-		BasePage.intialization();
+		log.info("****************************** Starting test case execution  *****************************************");			
+	BasePage.intialization();
 	}
 
 	/* This method will call the closewindow method from basePage class

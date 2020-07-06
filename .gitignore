@@ -13,3 +13,4 @@ ExtentReports/
 .settings
 .chromedriver.exe
 .output.txt
+.build.properties
