@@ -14,3 +14,4 @@ ExtentReports/
 .chromedriver.exe
 .output.txt
 .build.properties
+META-INF/
