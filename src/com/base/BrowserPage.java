@@ -1,5 +1,6 @@
 package com.base;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,20 +22,21 @@ public class BrowserPage {
 	//Declare the WebDriver
 	public static WebDriver driver;
 	public static ConfigurationFileReader readconfig;
-	static String filepath = System.getProperty("user.dir")+"\\src\\com\\config\\config.properties";
-	
-	//method to launchbrowser with the browsername mention in the config file
-	
+	static String workingdir = System.getProperty("user.dir");
+	static String filepath = workingdir+"/src/com/config/config.properties";
+
+	//method to launchbrowser wit the browsername mention in the config file
+
 	public static void launchBrowser() throws Exception {
 		readconfig = new ConfigurationFileReader(filepath);
-		
+
 		String browserName = System.getProperty("browser.type");
-		
+
 		if(browserName.equalsIgnoreCase("chrome")){
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
 			System.setProperty("webdriver.chrome.driver", readconfig.getProperty("ChromeDriver"));
-			
+
 			driver = new ChromeDriver();
 		}
 		else if(browserName.equals("firefox")){
