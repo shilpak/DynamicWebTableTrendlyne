@@ -10,7 +10,6 @@
 		<maven.test.skip>false</maven.test.skip>
 	</properties>
 	<build>
-
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>src</testSourceDirectory>
 
