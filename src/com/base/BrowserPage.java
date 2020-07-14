@@ -32,7 +32,7 @@ public class BrowserPage {
 		
 		String browserNameEnv = System.getProperty("browser.type");
 		
-		String browserName = (browserNameEnv == null) ? readconfig.getProperty("browser") : browserNameEnv;
+		String browserName = (browserNameEnv == null) ? readconfig.getProperty("browser.type") : browserNameEnv;
 		
 		if(browserName.equalsIgnoreCase("chrome")){
 			log.info("launch chrome browser");
