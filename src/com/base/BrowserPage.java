@@ -1,6 +1,5 @@
 package com.base;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.reusablecode.MethodsVariable;
-import com.base.ConfigurationFileReader;
+import com.exceptions.MissingConfigPropertyException;
 /**
  * @author Shilpa
  * BrowserPage class is used to start the browsers based on the values given in the property file.
@@ -31,13 +30,18 @@ public class BrowserPage {
 		readconfig = new ConfigurationFileReader(filepath);
 
 		String browserName = System.getProperty("browser.type");
+        String defaultBrowser = readconfig.getProperty("DefaultLocalBrowser");
 
-        String defaultBrowser = "chrome";
         if (browserName.equals("")) {
             log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
+            if (defaultBrowser.equals("")) {
+                log.error("Assuming default local browser but 'DefaultLocalBrowser' was " + 
+                        "not set in config.properties.  Set config and retry.");
+                        throw new MissingConfigPropertyException("Missing 'DefaultLocalBrowser' property.");
+            }
             browserName = defaultBrowser;
         }
-        
+
 		if(browserName.equalsIgnoreCase("chrome")){
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
