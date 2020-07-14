@@ -32,6 +32,12 @@ public class BrowserPage {
 
 		String browserName = System.getProperty("browser.type");
 
+        String defaultBrowser = "chrome";
+        if (browserName.equals("")) {
+            log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
+            browserName = defaultBrowser;
+        }
+        
 		if(browserName.equalsIgnoreCase("chrome")){
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
