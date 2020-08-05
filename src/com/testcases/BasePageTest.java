@@ -21,7 +21,7 @@ public class BasePageTest {
 	
 	@BeforeMethod	
 	public void setup() throws Exception {	
-		log.info("****************************** Starting test case execution  *****************************************");			
+		log.info("****************************** Starting test case execution  *****************************************");	
 	BasePage.intialization();
 	}
 
