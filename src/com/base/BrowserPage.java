@@ -1,6 +1,5 @@
 package com.base;
 
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -10,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -37,8 +37,7 @@ public class BrowserPage {
 
 	// method to launchbrowser wit the browsername mention in the config file
 
-	public static void launchLocalBrowser() throws Exception {		
-		browserConfig();
+	public static void launchLocalBrowser() throws Exception {				
 		if (browserName.equalsIgnoreCase("chrome")) {
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
@@ -50,26 +49,57 @@ public class BrowserPage {
 			System.setProperty("webdriver.gecko.driver", readconfig.getProperty("GeckoDriver"));
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			driver = new FirefoxDriver();
+			if (browserName.equals("")) {
+				log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
+				if (defaultBrowser.equals("")) {
+					log.error("Assuming default local browser but 'DefaultLocalBrowser' was "
+							+ "not set in config.properties.  Set config and retry.");
+					throw new MissingConfigPropertyException("Missing 'DefaultLocalBrowser' property.");
+				}
+				browserName = defaultBrowser;
+			}
+
 		}
 
 	}
 
+	public static String getUrl() {
+
+		String browserHost = System.getProperty("browser.host");
+		String url = null;
+		switch(browserHost)		
+		{
+		case "localhost":
+			url = readconfig.getProperty("localAddress");
+			break;
+		case "grid":
+			url = readconfig.getProperty("remoteAddress");
+			break;
+		default:
+			return null;			
+		}
+		return url;
+	}
+
 	public static void launchRemoteBrowser() throws MalformedURLException, UnknownHostException {
-		browserConfig();
-		String host = System.getProperty("browser.host");
-		String ipAddress = InetAddress.getLocalHost().getHostAddress();
-		if(host.equalsIgnoreCase("local") || host.equalsIgnoreCase("grid"))
+
+		String url = getUrl();
+		if(url == null) return;
+
 		switch (defaultBrowser) {
 		case "chrome":
 			capability = DesiredCapabilities.chrome();
 			capability.setBrowserName("chrome");
 			capability.setPlatform(Platform.ANY);
+			capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--incognito");
+			chromeOptions.addArguments("--disable-notifications");
 			chromeOptions.merge(capability);
-			driver = new RemoteWebDriver(new URL("http://"+ipAddress+":4444/wd/hub"), chromeOptions);
+			driver = new RemoteWebDriver(new URL(url), chromeOptions);
 
 			break;
-			
+
 		case "firefox":
 			capability = DesiredCapabilities.firefox();
 			capability.setBrowserName("firefox");
@@ -77,27 +107,14 @@ public class BrowserPage {
 			capability.setCapability("marionette", true);
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			firefoxOptions.merge(capability);
-			driver = new RemoteWebDriver(new URL("http://"+ipAddress+":4444/wd/hub"), firefoxOptions);
+			driver = new RemoteWebDriver(new URL(url), firefoxOptions);
 			break;
-			
+
 		default:
-			capability = DesiredCapabilities.firefox();
-			capability.setBrowserName("firefox");
-			capability.setPlatform(Platform.ANY);
-			driver = new RemoteWebDriver(new URL("http://"+ipAddress+":4444/wd/hub"), capability);
+
 			break;
 
 		}
 	}
-	public static void browserConfig() {
-		if (browserName.equals("")) {
-			log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
-			if (defaultBrowser.equals("")) {
-				log.error("Assuming default local browser but 'DefaultLocalBrowser' was "
-						+ "not set in config.properties.  Set config and retry.");
-				throw new MissingConfigPropertyException("Missing 'DefaultLocalBrowser' property.");
-			}
-			browserName = defaultBrowser;
-		}
-	}
+
 }
