@@ -1,7 +1,6 @@
 package com.base;
 
 import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.reusablecode.MethodsVariable;
@@ -10,26 +9,27 @@ import com.reusablecode.MethodsVariable;
 public class BasePage extends BrowserPage {
 
 	private static final Logger log = LoggerFactory.getLogger(BasePage.class);
+	public static ConfigurationFileReader readconfig = new ConfigurationFileReader(filepath);
 
 	//method to start the browser 
 	public static void intialization() throws Exception {
-		readconfig = new ConfigurationFileReader(filepath);
+		
 		log.info("it will launch browser at runtime");
-		if(readconfig.getProperty("RunMode").equalsIgnoreCase("local")) {
-			BrowserPage.launchLocalBrowser();
-			log.info("open the web application");
-		} else if(readconfig.getProperty("RunMode").equalsIgnoreCase("Remote"))
+		
+		String browserHost = System.getProperty("browser.host");
+		switch(browserHost)		
 		{
+		case "local":
+			BrowserPage.launchLocalBrowser();
+			break;
+		case "grid":
 			BrowserPage.launchRemoteBrowser();
+			break;
+		default:
+			System.out.println(browserHost +" value is invalid");	
+			BrowserPage.launchLocalBrowser();
 		}
-		else { 
-			try { 
-				throw new Exception("Please set up the run mode properly in config.properties"); 
-			} catch (Exception e) { 
-				e.printStackTrace(); 
-			} 
-		}
-
+		
 		BrowserPage.driver.get(readconfig.getProperty("url"));
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();

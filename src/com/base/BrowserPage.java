@@ -25,7 +25,6 @@ import com.exceptions.MissingConfigPropertyException;
 public class BrowserPage {
 
 	private static final Logger log = LoggerFactory.getLogger(BrowserPage.class);
-	// Declare the WebDriver
 	public static WebDriver driver;
 	static String workingdir = System.getProperty("user.dir");
 	static String filepath = workingdir + "/src/com/config/config.properties";
@@ -37,7 +36,9 @@ public class BrowserPage {
 
 	// method to launchbrowser wit the browsername mention in the config file
 
-	public static void launchLocalBrowser() throws Exception {				
+	public static void launchLocalBrowser() throws Exception {
+		defaultbrowserConfig();
+		readconfig = new ConfigurationFileReader(filepath);
 		if (browserName.equalsIgnoreCase("chrome")) {
 			log.info("launch chrome browser");
 			System.setProperty("webdriver.chrome.silentOutput", "true");
@@ -49,42 +50,16 @@ public class BrowserPage {
 			System.setProperty("webdriver.gecko.driver", readconfig.getProperty("GeckoDriver"));
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			driver = new FirefoxDriver();
-			if (browserName.equals("")) {
-				log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
-				if (defaultBrowser.equals("")) {
-					log.error("Assuming default local browser but 'DefaultLocalBrowser' was "
-							+ "not set in config.properties.  Set config and retry.");
-					throw new MissingConfigPropertyException("Missing 'DefaultLocalBrowser' property.");
-				}
-				browserName = defaultBrowser;
-			}
-
 		}
 
 	}
 
-	public static String getUrl() {
-
-		String browserHost = System.getProperty("browser.host");
-		String url = null;
-		switch(browserHost)		
-		{
-		case "localhost":
-			url = readconfig.getProperty("localAddress");
-			break;
-		case "grid":
-			url = readconfig.getProperty("remoteAddress");
-			break;
-		default:
-			return null;			
-		}
-		return url;
-	}
 
 	public static void launchRemoteBrowser() throws MalformedURLException, UnknownHostException {
-
-		String url = getUrl();
-		if(url == null) return;
+		
+		defaultbrowserConfig();
+		
+		readconfig = new ConfigurationFileReader(filepath);
 
 		switch (defaultBrowser) {
 		case "chrome":
@@ -96,7 +71,7 @@ public class BrowserPage {
 			chromeOptions.addArguments("--incognito");
 			chromeOptions.addArguments("--disable-notifications");
 			chromeOptions.merge(capability);
-			driver = new RemoteWebDriver(new URL(url), chromeOptions);
+			driver = new RemoteWebDriver(new URL(readconfig.getProperty("gridAddress")), chromeOptions);
 
 			break;
 
@@ -107,7 +82,7 @@ public class BrowserPage {
 			capability.setCapability("marionette", true);
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			firefoxOptions.merge(capability);
-			driver = new RemoteWebDriver(new URL(url), firefoxOptions);
+			driver = new RemoteWebDriver(new URL(readconfig.getProperty("gridAddress")), firefoxOptions);
 			break;
 
 		default:
@@ -117,4 +92,15 @@ public class BrowserPage {
 		}
 	}
 
+	public static void defaultbrowserConfig() {
+		if (browserName.equals("")) {
+			log.warn("The System Property browser.type was not set.  Defaulting to {}", defaultBrowser);
+			if (defaultBrowser.equals("")) {
+				log.error("Assuming default local browser but 'DefaultLocalBrowser' was "
+						+ "not set in config.properties.  Set config and retry.");
+				throw new MissingConfigPropertyException("Missing 'DefaultLocalBrowser' property.");
+			}
+			browserName = defaultBrowser;
+		}
+	}
 }
